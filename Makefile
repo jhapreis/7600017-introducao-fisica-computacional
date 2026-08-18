@@ -1,12 +1,18 @@
+.PHONY: clean
+
 include .env
 
-SRCS := $(shell find $(FOLDER) -type f -name "*.f")
-EXES := $(SRCS:.f=.exe)
+CLEAN_FOLDER := $(patsubst %/,%,$(FOLDER))
+N := $(lastword $(subst -, ,$(CLEAN_FOLDER)))
 
 clean:
-	-rm -rf */**.out */**.exe
+	-find . -type f -name "*.exe" -delete
+	-rm -rf build/
 
-package: clean $(EXES)
-
-%.exe: %.f
-	gfortran $< -o $@
+package: clean
+	mkdir build/
+	cp -r $(FOLDER)/** build/
+	@for f in $$(find build/ -type f -name "*.f"); do \
+		gfortran "$$f" -o "$${f%.f}.exe" || continue; \
+	done
+	mv "build/relatorio-$(N).pdf" "build/relatorio-$(N)-$(NUSP).pdf"
