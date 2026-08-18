@@ -7,7 +7,7 @@
 	
 	read(*,*) r, d
 	
-	open(unit=99, file='tarefa6.dat')
+	open(unit=99, file='tarefa-6-saida.dat')
 	
 	do i=0,d,1
 		volume_i = volume(r, i)
