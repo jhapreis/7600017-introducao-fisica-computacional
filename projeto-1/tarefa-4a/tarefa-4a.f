@@ -1,10 +1,10 @@
-	real x, cos_real, fx, cos_x, error
+	real x, cos_series, fx, cos_x, error
 	
 	read(*,*) x
 	
-	fx = cos_real(x)
+	fx = cos_series(x)
 	
-	cos_x = real(cos(x), 4)
+	cos_x = cos(x)
 	
 	error = abs(cos_x - fx)
 	
@@ -37,7 +37,7 @@
 	! Parâmetros:
 	! 	x: um valor real (de preferência entre -pi e pi)
 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	real function cos_real(x)
+	real function cos_series(x)
 		real x
 		! Parâmetro passado para a função
 		
@@ -59,12 +59,12 @@
 		i = 2.0e0
 		signal = -1e0
 		error_max = 1.0e-5
-		cos_real = 1.0e0 ! primeiro valor da série
+		cos_series = 1.0e0 ! primeiro valor da série
 		delta = 0.5e0 * x**2 ! segundo valor da série
 
 		do while (delta.ge.error_max) ! Modifica os termos até o delta ser menor que a tolerância
 			! print *, 'delta=', delta, 'factorial=', factorial(i)
-			cos_real = cos_real + signal * delta
+			cos_series = cos_series + signal * delta
 			i = i + 2.0e0
 			signal = -1.0e0 * signal
 			delta = 1.0e0 / factorial(i) * x**i

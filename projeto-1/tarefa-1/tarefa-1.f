@@ -9,6 +9,14 @@
 	! 	V = 4 * pi**2 * Ra * Rb**2
 	! 	R = (r2 + r1) / 2
 	!	r = (r2 - r1) / 2
+
+	! Ler o valor de input
+	double precision r1, r2
+	double precision radius_a, radius_b, area, volume
+	read (*,*) r1,r2
+	
+	print *, area(r1,r2), volume(r1,r2)
+	end
 	
 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	! Funções
@@ -44,17 +52,5 @@
 	pi = acos(-1d0)
 	volume = 4d0 * pi**2 * radius_a(r1, r2) * radius_b(r1,r2)**2
 	return
-	end
-
-	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	! Programa principal
-	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-	! Ler o valor de input
-	double precision r1, r2
-	double precision radius_a, radius_b, area, volume
-	read (*,*) r1,r2
-	
-	print *, area(r1,r2), volume(r1,r2)
 	end
 	
