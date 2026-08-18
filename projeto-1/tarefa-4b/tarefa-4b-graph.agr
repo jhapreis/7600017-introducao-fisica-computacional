@@ -83,7 +83,7 @@
 @timestamp rot 0
 @timestamp font 0
 @timestamp char size 1.000000
-@timestamp def "Tue Aug 18 14:01:19 2026"
+@timestamp def "Tue Aug 18 18:05:08 2026"
 @r0 off
 @link r0 to g0
 @r0 type above
@@ -134,11 +134,11 @@
 @    stack world 0, 0, 0, 0
 @    znorm 1
 @    view 0.150000, 0.150000, 1.150000, 0.850000
-@    title ""
+@    title "Erro na computaçao das funcoes em funçao da maxima precisao"
 @    title font 0
 @    title size 1.500000
 @    title color 1
-@    subtitle ""
+@    subtitle "Valores computados como \f{1}|f(x) - cos(x)|\f{0}, onde \f{1}f(x)\f{0} e a serie de \f{1}cos(x)\f{0}"
 @    subtitle font 0
 @    subtitle size 1.000000
 @    subtitle color 1
@@ -153,7 +153,7 @@
 @    xaxis  bar color 1
 @    xaxis  bar linestyle 1
 @    xaxis  bar linewidth 1.0
-@    xaxis  label ""
+@    xaxis  label "Precisao utilizada para o calculo da serie de \f{1}cos(x)\f{0}"
 @    xaxis  label layout para
 @    xaxis  label place auto
 @    xaxis  label char size 1.000000
@@ -204,7 +204,7 @@
 @    yaxis  bar color 1
 @    yaxis  bar linestyle 1
 @    yaxis  bar linewidth 1.0
-@    yaxis  label ""
+@    yaxis  label "Erro \f{1}err\f{0} entre as funcoes"
 @    yaxis  label layout para
 @    yaxis  label place auto
 @    yaxis  label char size 1.000000
@@ -288,7 +288,7 @@
 @    s0 symbol skip 0
 @    s0 line type 1
 @    s0 line linestyle 1
-@    s0 line linewidth 1.0
+@    s0 line linewidth 2.0
 @    s0 line color 1
 @    s0 line pattern 1
 @    s0 baseline type 0
@@ -321,7 +321,7 @@
 @    s0 errorbar riser clip off
 @    s0 errorbar riser clip length 0.100000
 @    s0 comment "tarefa-4b-saida.dat"
-@    s0 legend  ""
+@    s0 legend  "Erro entre as funçoes"
 @target G0.S0
 @type xy
 1e-05 4.1678091e-06
