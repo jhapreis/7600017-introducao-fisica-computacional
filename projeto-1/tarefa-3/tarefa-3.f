@@ -16,7 +16,7 @@
 	
 	print *, "Insira o tamanho do arquivo original: "
 	read (*,*) n
-	print(*,*) n
+	print *, n
 
 	print *, "Insira o tamanho do subconjunto de menores valores: "
 	read (*,*) m
