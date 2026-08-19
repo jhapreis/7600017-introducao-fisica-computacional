@@ -7,6 +7,7 @@ N := $(lastword $(subst -, ,$(CLEAN_FOLDER)))
 
 clean:
 	-find . -type f -name "*.exe" -delete
+	-find . -type f -name "*.out" -delete
 	-rm -rf build/
 
 package: clean
