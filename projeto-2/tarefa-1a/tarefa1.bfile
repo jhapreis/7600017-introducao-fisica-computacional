@@ -1,0 +1,75 @@
+TITLE "Media <r> como funcao de N"
+SUBTITLE "Comparacao com o valor esperado <r> = 0.5"
+
+xaxes scale Logarithmic
+
+XAXIS LABEL "Tamanho da sequencia N"
+YAXIS LABEL "Media da sequencia de tamanho N"
+
+READ BLOCK "arquivo-saida-1.dat"
+BLOCK xy "2:3"
+
+READ BLOCK "arquivo-saida-2.dat"
+BLOCK xy "2:3"
+
+READ BLOCK "arquivo-saida-3.dat"
+BLOCK xy "2:3"
+
+READ BLOCK "arquivo-saida-4.dat"
+BLOCK xy "2:3"
+
+READ BLOCK "arquivo-saida-5.dat"
+BLOCK xy "2:3"
+
+READ BLOCK "arquivo-saida-6.dat"
+BLOCK xy "2:3"
+
+READ BLOCK "arquivo-saida-7.dat"
+BLOCK xy "2:3"
+
+READ BLOCK "arquivo-saida-8.dat"
+BLOCK xy "2:3"
+
+READ BLOCK "arquivo-saida-9.dat"
+BLOCK xy "2:3"
+
+s0 line color 1
+s0 line linewidth 2
+
+s1 line color 1
+s1 line linewidth 2
+
+s2 line color 1
+s2 line linewidth 2
+
+s3 line color 1
+s3 line linewidth 2
+
+s4 line color 1
+s4 line linewidth 2
+
+s5 line color 1
+s5 line linewidth 2
+
+s6 line color 1
+s6 line linewidth 2
+
+s7 line color 1
+s7 line linewidth 2
+
+s8 line color 1
+s8 line linewidth 2
+
+with line
+    line on
+    line loctype world
+    line g0
+    line 1, 0.5, 20000, 0.5
+    line color 2
+    line linewidth 1.5
+    line linestyle 2
+
+AUTOSCALE
+
+SAVEALL "tarefa1-1-means-v2.agr"
+
