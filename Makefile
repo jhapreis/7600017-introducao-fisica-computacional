@@ -8,7 +8,7 @@ N := $(lastword $(subst -, ,$(CLEAN_FOLDER)))
 clean:
 	-find . -type f -name "*.exe" -delete
 	-find . -type f -name "*.out" -delete
-# 	-find . -type f -name "*.dat" -delete
+	-find . -type f -name "*(Copy)*.txt" -delete
 	-rm -rf build/
 
 package: clean
