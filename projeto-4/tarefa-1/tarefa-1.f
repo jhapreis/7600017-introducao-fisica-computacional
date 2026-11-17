@@ -66,7 +66,6 @@
 		n     = nint(delta_t/dt, 8) + 1
 
 		call resistencia_do_ar(fname, n, p, m, rho, a, dt)
-		call velocidade_terminal(fname, p, rho, a)
 	return
 	end
 
@@ -86,9 +85,10 @@
 
 		double precision k_energy
 		double precision velocity, velocity_t_no_air
+		double precision velocidade_terminal_teorica
 		double precision integral_simpson
 
-		double precision v(n), v_no_air(n), v_air(n)
+		double precision v(n), v_no_air(n), v_air(n), v_term
 		double precision t, k_no_air, k_air
 		double precision r_no_air, r_air
 		integer i
@@ -123,29 +123,27 @@
 			r_air    = integral_simpson(v_air   , n, dt)
 			write(20, *) r_no_air, r_air
 		close(20)
-	return
-	end
-
-!------------------------------------------------------------------------------
-! Subrotina para salvar os dados da velocidade terminal teórica
-! 	v = (2P/rho*A)**(1/3)
-!------------------------------------------------------------------------------
-	subroutine velocidade_terminal(fname, p, rho, a)
-		implicit none
-		character*40 fname
-		double precision p, rho, a
-
-		double precision v
-
-		v = (2.0d0*p/(rho*a))**(1.0d0/3.0d0)
-
+		
+		v_term = velocidade_terminal_teorica(p, rho, a)
+		
 		open(unit=20, file=trim(fname)//"-velocidade-terminal.dat")
-			write(20, *) v
+			write(20, *) v_air(n), v_term
 		close(20)
 	return
 	end
 
+!------------------------------------------------------------------------------
+! Função para calcular o valor da velocidade terminal teórica
+! 	v = (2P/rho*A)**(1/3)
+!------------------------------------------------------------------------------
+	double precision function velocidade_terminal_teorica(p, rho, a)
+		implicit none
+		double precision p, rho, a
 
+		velocidade_terminal_teorica =
+     # 		(2.0d0*p/(rho*a))**(1.0d0/3.0d0)
+	return
+	end
 
 !------------------------------------------------------------------------------
 ! Energia cinética: termo de iteração

@@ -46,8 +46,9 @@ def carregar_deslocamento(filepath):
 
 
 def carregar_v_terminal(filepath):
-    """Retorna v_terminal teórica em m/s."""
-    return float(np.loadtxt(filepath))
+    """Retorna (v_terminal, v_terminal teórica) em m/s."""
+    dados = np.loadtxt(filepath)
+    return float(dados[0]), float(dados[1])
 
 
 # ==============================================================================
@@ -90,7 +91,7 @@ def plot_item_a():
 # ==============================================================================
 def plot_item_b():
     d = carregar_dados_tempo("tarefa-1_A0.30_dt0.01-simulacao-v-tempo.dat")
-    v_term = carregar_v_terminal("tarefa-1_A0.30_dt0.01-velocidade-terminal.dat")
+    _, v_term_teor = carregar_v_terminal("tarefa-1_A0.30_dt0.01-velocidade-terminal.dat")
 
     plt.figure(figsize=(8, 5))
     plt.plot(d["t"], d["v_no_air"], "k--", label="Sem resistência do ar", alpha=0.7)
@@ -103,10 +104,10 @@ def plot_item_b():
     )
 
     plt.axhline(
-        v_term,
+        v_term_teor,
         color="r",
         linestyle=":",
-        label=rf"Velocidade Terminal Teórica $v^* = {v_term:.2f}\text{{ m/s}}$",
+        label=rf"Velocidade Terminal Teórica $v^* = {v_term_teor:.2f}\text{{ m/s}}$",
     )
 
     plt.title("Tarefa 1b: Efeito da Resistência do Ar na Velocidade")
@@ -133,17 +134,16 @@ def plot_item_c():
         f_sim = f"tarefa-1_A{a_val:.2f}_dt{dt}-simulacao-v-tempo.dat"
         f_vt = f"tarefa-1_A{a_val:.2f}_dt{dt}-velocidade-terminal.dat"
 
-        if os.path.exists(f_sim):
-            d = carregar_dados_tempo(f_sim)
-            v_term = carregar_v_terminal(f_vt) if os.path.exists(f_vt) else None
+        d = carregar_dados_tempo(f_sim)
+        _, v_term_teor = carregar_v_terminal(f_vt)
 
-            lbl = rf"$A = {a_val:.2f}\text{{ m}}^2$"
-            if v_term:
-                lbl += rf" ($v^* = {v_term:.2f}\text{{ m/s}}$)"
+        lbl = rf"$A = {a_val:.2f}\text{{ m}}^2$"
+        if v_term_teor:
+            lbl += rf" ($v^* = {v_term_teor:.2f}\text{{ m/s}}$)"
 
-            plt.plot(d["t"], d["v_air"], color=cor, label=lbl, linewidth=2)
-            if v_term:
-                plt.axhline(v_term, color=cor, linestyle=":", alpha=0.5)
+        plt.plot(d["t"], d["v_air"], color=cor, label=lbl, linewidth=2)
+        if v_term_teor:
+            plt.axhline(v_term_teor, color=cor, linestyle=":", alpha=0.5)
 
     plt.title(r"Tarefa 1c: Influência da Área Útil $A$ na Velocidade Terminal")
     plt.xlabel("Tempo $t$ (s)")
@@ -197,17 +197,22 @@ def plot_comparacao_dt():
 # ==============================================================================
 def imprimir_resumo():
     print(
-        "\n==================================================================================="
+        "\n============================================================================================="
     )
     print("TABELA RESUMO - DISTÂNCIA PERCORRIDA E VELOCIDADE TERMINAL")
     print(
-        "==================================================================================="
+        "============================================================================================="
     )
     print(
-        f"{'Área A (m²)':<12} | {'dt (s)':<8} | {'Dist. Sem Ar (m)':<18} | {'Dist. Com Ar (m)':<18} | {'v* Teórica (m/s)':<18}"
+        f"{'Área A (m²)':<12}"
+        f"| {'dt (s)':<8}"
+        f"| {'Dist. Sem Ar (m)':<18}"
+        f"| {'Dist. Com Ar (m)':<18}"
+        f"| {'v* (m/s)':<18}"
+        f"| {'v* Teórica (m/s)':<18}"
     )
     print(
-        "--------------------------------------------------------------------------------"
+        "------------------------------------------------------------------------------------------"
     )
 
     for a in ["0.20", "0.30", "0.40"]:
@@ -216,12 +221,17 @@ def imprimir_resumo():
             f_vt = f"tarefa-1_A{a}_dt{dt}-velocidade-terminal.dat"
 
             r_no, r_air = carregar_deslocamento(f_desl)
-            v_term = carregar_v_terminal(f_vt)
+            v_term, v_term_teor = carregar_v_terminal(f_vt)
             print(
-                f"{a:<12} | {dt:<8} | {r_no:<18.2f} | {r_air:<18.2f} | {v_term:<18.2f}"
+                f"{a:<12}"
+                f"| {dt:<8}"
+                f"| {r_no:<18.2f}"
+                f"| {r_air:<18.2f}"
+                f"| {v_term:<18.2f}"
+                f"| {v_term_teor:<18.2f}"
             )
     print(
-        "==================================================================================="
+        "============================================================================================="
     )
 
 
