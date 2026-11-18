@@ -91,7 +91,9 @@ def plot_item_a():
 # ==============================================================================
 def plot_item_b():
     d = carregar_dados_tempo("tarefa-1_A0.30_dt0.01-simulacao-v-tempo.dat")
-    _, v_term_teor = carregar_v_terminal("tarefa-1_A0.30_dt0.01-velocidade-terminal.dat")
+    _, v_term_teor = carregar_v_terminal(
+        "tarefa-1_A0.30_dt0.01-velocidade-terminal.dat"
+    )
 
     plt.figure(figsize=(8, 5))
     plt.plot(d["t"], d["v_no_air"], "k--", label="Sem resistência do ar", alpha=0.7)
